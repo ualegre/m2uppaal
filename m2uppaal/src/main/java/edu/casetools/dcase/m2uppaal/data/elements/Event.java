@@ -2,27 +2,27 @@ package edu.casetools.dcase.m2uppaal.data.elements;
 
 public class Event {
 
-	private int id;
-	private int stateId;
-	private int time;
+	private String id;
+	private String stateId;
+	private String time;
 	private String stateValue;
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getStateId() {
+	public String getStateId() {
 		return stateId;
 	}
-	public void setStateId(int stateId) {
+	public void setStateId(String stateId) {
 		this.stateId = stateId;
 	}
-	public int getTime() {
+	public String getTime() {
 		return time;
 	}
-	public void setTime(int time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 	public String getStateValue() {

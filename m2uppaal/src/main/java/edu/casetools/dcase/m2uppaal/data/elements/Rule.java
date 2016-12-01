@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public class Rule {
-	private int id;
+	private String id;
 	private List<RuleElement> antecedents;
 	private RuleElement consequent;
 	
@@ -27,11 +27,11 @@ public class Rule {
     	return getStateString(consequent,"==");
     }
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

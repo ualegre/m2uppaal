@@ -10,17 +10,17 @@ public class BoundedOperator {
 		STRONG_ABSOLUTE_PAST,
 		WEAK_ABSOLUTE_PAST}; 
 		
-	private	int id;
+	private	String id;
 	private	String status;
 	private	BOP_TYPE type;
-	private	int lowBound;
-	private	int uppBound;
-	private int stateId;
+	private	String lowBound;
+	private	String uppBound;
+	private String stateId;
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public BOP_TYPE getType() {
@@ -29,16 +29,16 @@ public class BoundedOperator {
 	public void setType(BOP_TYPE type) {
 		this.type = type;
 	}
-	public int getLowBound() {
+	public String getLowBound() {
 		return lowBound;
 	}
-	public void setLowBound(int lowBound) {
+	public void setLowBound(String lowBound) {
 		this.lowBound = lowBound;
 	}
-	public int getUppBound() {
+	public String getUppBound() {
 		return uppBound;
 	}
-	public void setUppBound(int uppBound) {
+	public void setUppBound(String uppBound) {
 		this.uppBound = uppBound;
 	}
 	public String getStatus() {
@@ -47,10 +47,10 @@ public class BoundedOperator {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getStateId() {
+	public String getStateId() {
 		return stateId;
 	}
-	public void setStateId(int stateId) {
+	public void setStateId(String stateId) {
 		this.stateId = stateId;
 	}
 	
