@@ -13,7 +13,6 @@ import edu.casetools.dcase.m2uppaal.juppaal.labels.Guard;
 import edu.casetools.dcase.m2uppaal.juppaal.labels.Synchronization;
 import edu.casetools.dcase.m2uppaal.juppaal.labels.Synchronization.SyncType;
 import edu.casetools.dcase.m2uppaal.juppaal.labels.Update;
-import edu.casetools.dcase.m2uppaal.mnta.locations.SAPLocations;
 import edu.casetools.dcase.m2uppaal.mnta.locations.SIPLocations;
 
 public class SIPGenerator extends AbstractTemplateGenerator {

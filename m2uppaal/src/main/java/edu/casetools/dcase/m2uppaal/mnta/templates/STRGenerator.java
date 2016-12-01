@@ -5,7 +5,6 @@ import java.util.List;
 
 import edu.casetools.dcase.m2uppaal.data.MData;
 import edu.casetools.dcase.m2uppaal.juppaal.elements.Automaton;
-import edu.casetools.dcase.m2uppaal.juppaal.elements.Declaration;
 import edu.casetools.dcase.m2uppaal.juppaal.elements.Location;
 import edu.casetools.dcase.m2uppaal.juppaal.elements.Nail;
 import edu.casetools.dcase.m2uppaal.juppaal.elements.Transition;
@@ -13,7 +12,6 @@ import edu.casetools.dcase.m2uppaal.juppaal.labels.Guard;
 import edu.casetools.dcase.m2uppaal.juppaal.labels.Synchronization;
 import edu.casetools.dcase.m2uppaal.juppaal.labels.Synchronization.SyncType;
 import edu.casetools.dcase.m2uppaal.juppaal.labels.Update;
-import edu.casetools.dcase.m2uppaal.mnta.locations.SAPLocations;
 import edu.casetools.dcase.m2uppaal.mnta.locations.STRLocations;
 
 public class STRGenerator extends AbstractTemplateGenerator {

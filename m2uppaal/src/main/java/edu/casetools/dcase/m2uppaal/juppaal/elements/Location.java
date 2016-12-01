@@ -15,41 +15,7 @@ import edu.casetools.dcase.m2uppaal.juppaal.labels.Invariant;
 
 public class Location extends PositionedUppaalElement {
 
-    private boolean transitional;
-    private static final Pattern locationIdRegExPattern = Pattern.compile("\\d+");
-
-    // testing accepting locations
-    private boolean accept;
-
-    public boolean isAccept() {
-	return accept;
-    }
-
-    public void setAccept(boolean accept) {
-	this.accept = accept;
-	if (accept) {
-	    getComment().addCommentLine("ACCEPT");
-	} else
-	    setComment("");
-    }
-
-    public void setComment(String string) {
-	this.setComment(new Comment(string));
-    }
-
-    /**
-     * The different types of locations
-     */
-    public enum LocationType {
-	COMMITTED, NORMAL, URGENT
-    }
-
     private static int idcounter = 0;
-
-    protected static int getNewID() {
-	return idcounter++;
-    }
-
     private Automaton automaton;
     private Comment comment;
     private int id = getNewID();
@@ -57,48 +23,52 @@ public class Location extends PositionedUppaalElement {
     private ExponentialRate expRate;
     private Name name;
     private LocationType type;
-    /*
-     * todo: ideally, a separate type should be made for branchpoints
-     */
-    private boolean branchPointLocation;
+    private boolean transitional;
+    private static final Pattern locationIdRegExPattern = Pattern.compile("\\d+");
 
-    public Location(Automaton automaton) {
-	this(automaton, null, null, 0, 0);
+    // testing accepting locations
+    private boolean accept;
+    
+    /**
+     * The different types of locations
+     */
+    public enum LocationType {
+	COMMITTED, NORMAL, URGENT
     }
 
     public Location(Automaton automaton, Element locationElement) {
-	super(locationElement); // get coordinates
-	type = getLocationType(locationElement);
-	@SuppressWarnings("unchecked")
-	List<Element> children = locationElement.getChildren();
-	for (Element child : children) {
-	    if (child.getName().equals("name"))
-		name = new Name(child);
-	    if (child.getName().equals("comment"))
-		comment = new Comment(child);
-	    if (child.getName().equals("label")) {
-		if ("invariant".equals(child.getAttributeValue("kind"))) {
-		    invariant = new Invariant(child);
-		} else if ("exponentialrate".equals(child.getAttributeValue("kind"))) {
-		    expRate = new ExponentialRate(child);
+		super(locationElement); // get coordinates
+		type = getLocationType(locationElement);
+		@SuppressWarnings("unchecked")
+		List<Element> children = locationElement.getChildren();
+		for (Element child : children) {
+		    if (child.getName().equals("name"))
+			name = new Name(child);
+		    if (child.getName().equals("comment"))
+			comment = new Comment(child);
+		    if (child.getName().equals("label")) {
+			if ("invariant".equals(child.getAttributeValue("kind"))) {
+			    invariant = new Invariant(child);
+			} else if ("exponentialrate".equals(child.getAttributeValue("kind"))) {
+			    expRate = new ExponentialRate(child);
+			}
+		    }
 		}
-	    }
-	}
-	String idString = locationElement.getAttributeValue("id");
-
-	Matcher regExMatcher = locationIdRegExPattern.matcher(idString);
-	boolean dbg_matchresult = regExMatcher.find();
-	assert dbg_matchresult;
-
-	String idMatch = regExMatcher.group();
-
-	this.id = Integer.parseInt(idMatch);
-	this.incomingTrans = new LinkedList<>();
-	this.outgoingTrans = new LinkedList<>();
-	automaton.addLocation(this);
-	this.setAutomaton(automaton);
+		String idString = locationElement.getAttributeValue("id");
+	
+		Matcher regExMatcher = locationIdRegExPattern.matcher(idString);
+		boolean dbg_matchresult = regExMatcher.find();
+		assert dbg_matchresult;
+	
+		String idMatch = regExMatcher.group();
+	
+		this.id = Integer.parseInt(idMatch);
+		this.incomingTrans = new LinkedList<>();
+		this.outgoingTrans = new LinkedList<>();
+		automaton.addLocation(this);
+		this.setAutomaton(automaton);
     }
-
+    
     /**
      * Creates a new location with all the properties set. The name and id must
      * be unique in the template, which is not checked here
@@ -137,6 +107,45 @@ public class Location extends PositionedUppaalElement {
 	this(automaton, new Name(name), LocationType.NORMAL, 0, 0);
     }
 
+
+    
+    public boolean isAccept() {
+	return accept;
+    }
+
+    public void setAccept(boolean accept) {
+	this.accept = accept;
+	if (accept) {
+	    getComment().addCommentLine("ACCEPT");
+	} else
+	    setComment("");
+    }
+
+    public void setComment(String string) {
+	this.setComment(new Comment(string));
+    }
+
+
+
+
+
+    protected static int getNewID() {
+	return idcounter++;
+    }
+
+
+    /*
+     * todo: ideally, a separate type should be made for branchpoints
+     */
+    private boolean branchPointLocation;
+
+    public Location(Automaton automaton) {
+	this(automaton, null, null, 0, 0);
+    }
+
+
+
+  
     @Override
     public Element generateXMLElement() {
 	Element result = super.generateXMLElement();
