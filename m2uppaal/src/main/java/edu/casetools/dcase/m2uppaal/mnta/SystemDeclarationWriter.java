@@ -62,7 +62,7 @@ public class SystemDeclarationWriter {
 
     private void writeEvents() throws IOException {
     	for(Event event:systemData.getEvents())
-    		writer.append("E" + event.getId() + " = Event("+event.getId()+","+event.getTime()+","+event.getStateId()+","+event.getStatus()+");\n");
+    		writer.append("E" + event.getId() + " = Event("+event.getId()+","+event.getTime()+","+event.getStateId()+","+event.getStateValue()+");\n");
     }
 
     private void initializeSystem() throws IOException {

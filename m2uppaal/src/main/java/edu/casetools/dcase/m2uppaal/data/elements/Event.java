@@ -5,7 +5,7 @@ public class Event {
 	private int id;
 	private int stateId;
 	private int time;
-	private String status;
+	private String stateValue;
 	
 	public int getId() {
 		return id;
@@ -25,11 +25,11 @@ public class Event {
 	public void setTime(int time) {
 		this.time = time;
 	}
-	public String getStatus() {
-		return status;
+	public String getStateValue() {
+		return stateValue;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStateValue(String status) {
+		this.stateValue = status;
 	}
 	
 	
