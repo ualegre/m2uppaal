@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.casetools.dcase</groupId>
   <artifactId>m2uppaal</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
   <name>m2uppaal</name>
   <url>https://github.com/ualegre/m2uppaal/</url>  
   	
