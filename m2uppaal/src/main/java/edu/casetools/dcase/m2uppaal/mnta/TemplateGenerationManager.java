@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.casetools.dcase.m2uppaal.data.MData;
+import edu.casetools.dcase.m2uppaal.data.elements.BoundedOperator.BOP_TYPE;
 import edu.casetools.dcase.m2uppaal.juppaal.elements.Automaton;
 import edu.casetools.dcase.m2uppaal.mnta.templates.EventGenerator;
 import edu.casetools.dcase.m2uppaal.mnta.templates.MTemplateGenerator;
@@ -14,7 +15,6 @@ import edu.casetools.dcase.m2uppaal.mnta.templates.STRGenerator;
 import edu.casetools.dcase.m2uppaal.mnta.templates.WAPGenerator;
 import edu.casetools.dcase.m2uppaal.mnta.templates.WIPGenerator;
 
-
 public class TemplateGenerationManager {
     private MData systemData;
 
@@ -24,18 +24,30 @@ public class TemplateGenerationManager {
 
     public List<Automaton> generateTemplates() {
 	List<Automaton> list = new ArrayList<>();
+
 	list.addAll(new MTemplateGenerator(systemData).generate());
-	list.addAll(new EventGenerator(systemData).generate());
-	list.addAll(new SIPGenerator(systemData).generate());
-	list.addAll(new WIPGenerator(systemData).generate());
-	list.addAll(new SAPGenerator(systemData).generate());
-	list.addAll(new WAPGenerator(systemData).generate());
-	list.addAll(new STRGenerator(systemData).generate());
-	list.addAll(new NTRGenerator(systemData).generate());
-	// createEvent();
-	// createTemporalOperators();
-	// writer = new STRTemplateWriter(writer, systemData).write();
-	// createNextTimeRules();
+	if (!systemData.getEvents().isEmpty()) {
+	    list.addAll(new EventGenerator(systemData).generate());
+	}
+	if (systemData.getBopNumber(BOP_TYPE.STRONG_IMMEDIATE_PAST) > 0) {
+	    list.addAll(new SIPGenerator(systemData).generate());
+	}
+	if (systemData.getBopNumber(BOP_TYPE.WEAK_IMMEDIATE_PAST) > 0) {
+	    list.addAll(new WIPGenerator(systemData).generate());
+	}
+	if (systemData.getBopNumber(BOP_TYPE.STRONG_ABSOLUTE_PAST) > 0) {
+	    list.addAll(new SAPGenerator(systemData).generate());
+	}
+	if (systemData.getBopNumber(BOP_TYPE.WEAK_ABSOLUTE_PAST) > 0) {
+	    list.addAll(new WAPGenerator(systemData).generate());
+	}
+	if (!systemData.getStrs().isEmpty()) {
+	    list.addAll(new STRGenerator(systemData).generate());
+	}
+	if (!systemData.getNtrs().isEmpty()) {
+	    list.addAll(new NTRGenerator(systemData).generate());
+	}
+
 	return list;
     }
 

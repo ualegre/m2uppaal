@@ -3,9 +3,7 @@ package edu.casetools.dcase.m2uppaal.mnta;
 import java.io.IOException;
 
 import edu.casetools.dcase.m2uppaal.data.MData;
-
-
-
+import edu.casetools.dcase.m2uppaal.data.elements.State;
 
 public class DeclarationsWriter {
     private static final String STRING_FALSE = "false";
@@ -20,23 +18,24 @@ public class DeclarationsWriter {
     public String write() throws IOException {
 	writeVariables();
 	writeStates();
+
 	return writer.toString();
     }
 
     private void writeVariables() throws IOException {
-		writer.append("\n\n");
-		writer.append("int __reach__ = 0;\nint __single__ = 0;\n\n");
-		writer.append("const int MAX_ITERATION = " + systemData.getMaxIteration() + ";\n");
-		writer.append("const int INTEGER_OVERFLOW = 32767;");
-		writer.append("\n");
-		writeElementNo();
-		writer.append("\n");
-		writeIDs();
-		writer.append("\n");
-		writeChannels();
-		writer.append("\n");
-		writer.append("iter iteration:=0;\n");
-		writer.append("bool reset:= true;\n");
+	writer.append("\n\n");
+	writer.append("int __reach__ = 0;\nint __single__ = 0;\n\n");
+	writer.append("const int MAX_ITERATION = " + systemData.getMaxIteration() + ";\n");
+	writer.append("const int INTEGER_OVERFLOW = 32767;");
+	writer.append("\n");
+	writeElementNo();
+	writer.append("\n");
+	writeIDs();
+	writer.append("\n");
+	writeChannels();
+	writer.append("\n");
+	writer.append("iter iteration:=0;\n");
+	writer.append("bool reset:= true;\n");
     }
 
     private void writeChannels() {
@@ -96,11 +95,13 @@ public class DeclarationsWriter {
     }
 
     private void getInitialStateValues() throws IOException {
+	State auxiliar;
 	for (int i = 0; i < systemData.getStates().size(); i++) {
 	    if (i != 0) {
 		writer.append(",");
 	    }
-	    writer.append(systemData.getStates().get(i).getName());
+	    auxiliar = systemData.getStates().get(i);
+	    writer.append(auxiliar.getInitialValue());
 	    breakLine(i);
 	}
     }

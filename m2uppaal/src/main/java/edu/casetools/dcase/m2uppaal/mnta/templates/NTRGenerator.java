@@ -15,15 +15,13 @@ import edu.casetools.dcase.m2uppaal.juppaal.labels.Synchronization.SyncType;
 import edu.casetools.dcase.m2uppaal.juppaal.labels.Update;
 import edu.casetools.dcase.m2uppaal.mnta.locations.NTRLocations;
 
-
 public class NTRGenerator extends AbstractTemplateGenerator {
 
     private static final String NTR_CHANNEL = "c_ntr[";
-	
-    public NTRGenerator(MData systemData) {
-    	super(systemData);
-    }
 
+    public NTRGenerator(MData systemData) {
+	super(systemData);
+    }
 
     @Override
     public List<Automaton> generate() {
@@ -33,15 +31,14 @@ public class NTRGenerator extends AbstractTemplateGenerator {
 	String consequent;
 
 	for (int i = 0; i < systemData.getNtrs().size(); i++) {
-	    rule = systemData.getNtrs().get(i).getRuleString("&&","==");
-	    invertedRule = systemData.getNtrs().get(i).getRuleString("||","!=");
+	    rule = systemData.getNtrs().get(i).getRuleString("&&", "==");
+	    invertedRule = systemData.getNtrs().get(i).getRuleString("||", "!=");
 	    consequent = systemData.getNtrs().get(i).getConsequentString();
 	    list.add(generateNTR(i, rule, invertedRule, consequent));
 	}
 
 	return list;
     }
-
 
     private Automaton generateNTR(int id, String rule, String invertedRule, String consequent) {
 	Automaton m = new Automaton("NTR_" + id);
@@ -110,15 +107,15 @@ public class NTRGenerator extends AbstractTemplateGenerator {
 	auxiliarTransition.addNail(new Nail(-51, 17));
 
 	auxiliarTransition = new Transition(m, next, initial);
-	auxiliarTransition.setSync(new Synchronization(NTR_CHANNEL + id + "]", SyncType.INITIATOR, -450, 25));
+	auxiliarTransition.setSync(new Synchronization(NTR_CHANNEL + id + "+1]", SyncType.INITIATOR, -450, 25));
 	auxiliarTransition.addNail(new Nail(-374, 127));
 	auxiliarTransition.addNail(new Nail(-374, -213));
 
 	auxiliarTransition = new Transition(m, notTriggered, waiting);
-	auxiliarTransition.setSync(new Synchronization(NTR_CHANNEL + id + "]", SyncType.INITIATOR, -170, -68));
+	auxiliarTransition.setSync(new Synchronization(NTR_CHANNEL + id + "+1]", SyncType.INITIATOR, -170, -68));
 
 	auxiliarTransition = new Transition(m, triggered, waiting);
-	auxiliarTransition.setSync(new Synchronization(NTR_CHANNEL + id + "]", SyncType.INITIATOR, 0, -68));
+	auxiliarTransition.setSync(new Synchronization(NTR_CHANNEL + id + "+1]", SyncType.INITIATOR, 0, -68));
 
 	auxiliarTransition = new Transition(m, initial, notTriggered);
 	auxiliarTransition.setGuard(new Guard(invertedRule, -280, -179));
