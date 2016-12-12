@@ -11,7 +11,6 @@ import edu.casetools.dcase.m2uppaal.data.elements.Rule;
 public class SystemDeclarationWriter {
 
     private StringBuilder writer;
-    private int eventNumber;
     private MData systemData;
 
     public SystemDeclarationWriter(MData systemData) {
@@ -107,7 +106,7 @@ public class SystemDeclarationWriter {
     }
 
     private void writeEventsSystemInitialization() throws IOException {
-	for (int i = 0; i < eventNumber; i++) {
+	for (int i = 0; i < systemData.getEvents().size(); i++) {
 	    writer.append(",E" + i);
 	    breakLine(i);
 	}
