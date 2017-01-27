@@ -38,6 +38,16 @@ public class MData {
 	this.maxIteration = maxIteration;
     }
 
+    public List<State> getIndependentStates() {
+	List<State> independentStates = new ArrayList<State>();
+	for (int i = 0; i < events.size(); i++) {
+	    if (independentStates.get(i).isIndependent()) {
+		independentStates.add(states.get(i));
+	    }
+	}
+	return independentStates;
+    }
+
     public List<State> getStates() {
 	return states;
     }

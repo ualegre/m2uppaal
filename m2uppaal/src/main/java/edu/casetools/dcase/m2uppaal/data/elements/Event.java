@@ -14,6 +14,13 @@ public class Event {
 	stateValue = "";
     }
 
+    public Event(String id, String stateId, String time, String stateValue) {
+	id = "";
+	stateId = "";
+	time = "";
+	stateValue = "";
+    }
+
     public String getId() {
 	return id;
     }
