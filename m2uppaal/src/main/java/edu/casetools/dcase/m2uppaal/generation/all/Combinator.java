@@ -1,4 +1,4 @@
-package edu.casetools.dcase.m2uppaal.combinator;
+package edu.casetools.dcase.m2uppaal.generation.all;
 
 import java.util.ArrayList;
 import java.util.List;

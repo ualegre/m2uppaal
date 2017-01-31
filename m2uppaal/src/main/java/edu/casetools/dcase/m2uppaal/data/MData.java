@@ -11,7 +11,9 @@ import edu.casetools.dcase.m2uppaal.data.elements.State;
 public class MData {
 
     private int maxIteration;
+    private String filePath;
     private List<State> states;
+    private List<State> independentStates;
     private List<Event> events;
     private List<Rule> strs;
     private List<Rule> ntrs;
@@ -38,8 +40,12 @@ public class MData {
 	this.maxIteration = maxIteration;
     }
 
+    public void setIndependentStates(List<State> independentStates) {
+	this.independentStates = independentStates;
+    }
+
     public List<State> getIndependentStates() {
-	List<State> independentStates = new ArrayList<State>();
+	independentStates = new ArrayList<>();
 	for (int i = 0; i < events.size(); i++) {
 	    if (independentStates.get(i).isIndependent()) {
 		independentStates.add(states.get(i));
@@ -104,6 +110,21 @@ public class MData {
 		result++;
 	}
 	return result;
+    }
+
+    public String getFilePath() {
+	return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+	this.filePath = filePath;
+    }
+
+    public void initialiseTestCase(String filepath) {
+	events = new ArrayList<>();
+	getIndependentStates();
+	this.filePath = filepath;
+
     }
 
 }

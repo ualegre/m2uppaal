@@ -5,7 +5,7 @@ public class State {
     private String id;
     private String name;
     private String initialValue;
-    private String independent;
+    private boolean isIndependent;
     private boolean value;
 
     public State() {
@@ -53,7 +53,18 @@ public class State {
     }
 
     public boolean isIndependent() {
-	return independent.equalsIgnoreCase("true");
+	return isIndependent;
+    }
+
+    public void setIndepedence(boolean isIndependent) {
+	this.isIndependent = isIndependent;
+    }
+
+    public void setIndepedence(String isIndependent) {
+	if (isIndependent.equalsIgnoreCase("true"))
+	    this.isIndependent = true;
+	else
+	    this.isIndependent = false;
     }
 
 }
